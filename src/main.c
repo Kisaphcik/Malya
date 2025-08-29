@@ -1,7 +1,8 @@
 #include"lexer/lexer.h"
+#include<stdio.h>
 
 int main() {
-    const char *code = "fn add(a: Int, b: Int) -> Int { let x: Int = 5; }";
+    const char *code = "func add(a: Int, b: Int) -> Int { let x: Int = 5; }";
     Lexer L = lexer_new(code);
     for (;;) {
         Token t = lexer_next_token(&L);

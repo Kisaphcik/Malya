@@ -1,4 +1,4 @@
-#include<string>
+#include<string.h>
 
 typedef enum{
     TOK_EOF,

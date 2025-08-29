@@ -14,7 +14,7 @@ Lexer lexer_new(const char *src){
     return L;
 }
 
-inline char lexer_peek(Lexer *L){
+char lexer_peek(Lexer *L){
     return L->src[L->pos];
 }
 
