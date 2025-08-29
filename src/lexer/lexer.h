@@ -45,6 +45,35 @@ Token lexer_next_token(Lexer *L){
     if(isdigit((unsigned char)c)){
         size_t start = L->pos;
         while(isdigit((unsigned char)lexer_peek(L))) lexer_next(L);
-        
+        size_t len = L->pos - start;
+        char *s = strndup(L->src + start, len);
+        return make_token(TOK_NUMBER, s, L->line);
     }
+
+    if(c == '"'){
+        lexer_next(L);
+        size_t start = L->pos;
+        while(lexer_peek(L) != '"' && lexer_peek(L) != '\0') lexer_next(L);
+        size_t len = L->pos - start;
+        char *s = strndup(L->src + start, len);
+        if (lexer_peek(L) == '"') lexer_next(L);
+        return make_token(TOK_STRING, s, L->line);
+    }
+
+    lexer_next(L);
+    switch (c) {
+        case ';': return make_token(TOK_SEMI, ";", L->line);
+        case '{': return make_token(TOK_LBRACE, "{", L->line);
+        case '}': return make_token(TOK_RBRACE, "}", L->line);
+        case '(': return make_token(TOK_LPAREN, "(", L->line);
+        case ')': return make_token(TOK_RPAREN, ")", L->line);
+        case ',': return make_token(TOK_COMMA, ",", L->line);
+        case ':': return make_token(TOK_COLON, ":", L->line);
+        case '-':
+            if (lexer_peek(L) == '>') { lexer_next(L); return make_token(TOK_ARROW, "->", L->line); }
+            break;
+    }
+
+    char tbuf[2] = { c, '\0' };
+    return make_token(TOK_IDENT, tbuf, L->line);
 }
