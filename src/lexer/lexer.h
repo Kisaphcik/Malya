@@ -1,6 +1,6 @@
 #include<stdlib.h>
 #include<ctype.h>
-#include<string>
+#include<string.h>
 #include"tokens.h"
 
 typedef struct {
