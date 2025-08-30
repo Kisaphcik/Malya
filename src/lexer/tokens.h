@@ -6,6 +6,8 @@ typedef enum{
     TOK_NUMBER,
     TOK_STRING,
     TOK_SEMI,
+    TOK_EQUAL,
+    TOK_UNKNOWN,
     TOK_LBRACE,
     TOK_RBRACE,
     TOK_LPAREN,
@@ -15,7 +17,8 @@ typedef enum{
     TOK_COLON,
     TOK_FN,
     TOK_LET,
-    TOK_STRUCT
+    TOK_STRUCT,
+    TOK_RETURN
 } TokenKind;
 
 typedef struct{

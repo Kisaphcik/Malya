@@ -40,6 +40,8 @@ Token lexer_next_token(Lexer *L){
         if(strcmp(s, "func") == 0) { free(s); return make_token(TOK_FN, "func", L->line);}
         if(strcmp(s, "let") == 0) { free(s); return make_token(TOK_LET, "let", L->line);}
         if(strcmp(s, "struct") == 0) { free(s); return make_token(TOK_STRUCT, "struct", L->line);}
+        if(strcmp(s, "return") == 0) { free(s); return make_token(TOK_RETURN, "return", L->line);}
+
         return make_token(TOK_IDENT, s, L-> line);
     }
     if(isdigit((unsigned char)c)){
@@ -66,6 +68,7 @@ Token lexer_next_token(Lexer *L){
         case '{': return make_token(TOK_LBRACE, "{", L->line);
         case '}': return make_token(TOK_RBRACE, "}", L->line);
         case '(': return make_token(TOK_LPAREN, "(", L->line);
+        case '=': return make_token(TOK_EQUAL, "=", L->line);
         case ')': return make_token(TOK_RPAREN, ")", L->line);
         case ',': return make_token(TOK_COMMA, ",", L->line);
         case ':': return make_token(TOK_COLON, ":", L->line);
@@ -75,5 +78,5 @@ Token lexer_next_token(Lexer *L){
     }
 
     char tbuf[2] = { c, '\0' };
-    return make_token(TOK_IDENT, tbuf, L->line);
+    return make_token(TOK_UNKNOWN, tbuf, L->line);
 }
