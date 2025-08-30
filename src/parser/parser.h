@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include"lexer/lexer.h"
-#include"asr.h"
+#include"../lexer/lexer.h"
+#include"ast.h"
 
 typedef struct{
     Lexer lexer;
-    Token cur
+    Token cur;
 } Parser;
 
 void parser_init(Parser *p, const char *src);
@@ -17,7 +17,7 @@ int parser_match(Parser *p, TokenKind k);
 int parser_expect(Parser *p, TokenKind k, const char *errmsg);
 
 void panic_at(Token* t, const char *msg){
-    fprint(stderr, "[Parse Error] line %d: %s (near '%s')\n", t->line, msg, t->lexeme)
+    fprintf(stderr, "[Parse Error] line %d: %s (near '%s')\n", t->line, msg, t->lexeme);
     exit(1);
 }
 

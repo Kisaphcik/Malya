@@ -33,3 +33,10 @@ typedef struct Node {
     long int_value;
     char *str_value;
 } Node;
+
+Node *node_new(NodeKind kind, int line) {
+    Node *n = calloc(1, sizeof(Node));
+    n->kind = kind;
+    n->line = line;
+    return n;
+}
